@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VendingMachineRepository")
  * @ORM\Table(name="vending_machine")
  */
 class VendingMachine 
@@ -32,6 +32,12 @@ class VendingMachine
 	 */
 	private $secret;
 
+	/**
+	 * @var string
+	 * Sometimes in our web/cli interface we may need to provide the key into unhashed form
+	 */
+	private $unhashedSecret;
+	
     /**
      * Get id
      *
@@ -75,6 +81,7 @@ class VendingMachine
      */
     public function setKey($key)
     {
+    	
         $this->key = $key;
 
         return $this;
@@ -99,7 +106,9 @@ class VendingMachine
      */
     public function setSecret($secret)
     {
-        $this->secret = $secret;
+    	$this->unhashedSecret=$secret;
+    	//Storing in a secure way
+        $this->secret = password_hash($secret,PASSWORD_BCRYPT);
 
         return $this;
     }
@@ -112,5 +121,10 @@ class VendingMachine
     public function getSecret()
     {
         return $this->secret;
+    }
+    
+    public function getSecretUnhashed()
+    {
+    	return $this->unhashedSecret;
     }
 }
