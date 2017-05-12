@@ -43,12 +43,6 @@ class PersonInNeed
 	 */
 	private $pin;
 	
-	/**
-	 * In order to return it we keep it into unhashed version
-	 * @var string
-	 */
-	private $pinUnhashed;
-	
 
     /**
      * Get id
@@ -141,8 +135,7 @@ class PersonInNeed
      */
     public function setPin($pin)
     {
-    	$this->pinUnhashed=$pin;
-        $this->pin = password_hash($pin,PASSWORD_BCRYPT);
+        $this->pin =$pin;
 
         return $this;
     }
@@ -157,8 +150,4 @@ class PersonInNeed
         return $this->pin;
     }
     
-    public function getPinUnhashed()
-    {
-    	return $this->pinUnhashed;
-    }
 }

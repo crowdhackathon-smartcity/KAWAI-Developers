@@ -5,14 +5,15 @@ namespace AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\PersonInNeed;
 use AppBundle\Interfaces\GenerateUniqueStrategy;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 class PersonInNeedRepository extends EntityRepository
 {
 	private $uniqueStrategy;
 	
-	public function __construct(GenerateUniqueStrategy $uniqueStrategy)
+	public function __construct($em, ClassMetadata $class)
 	{
-		$this->uniqueStrategy=$uniqueStrategy;	
+		parent::__construct($em, $class);	
 	}
 	
 	/**
@@ -21,7 +22,12 @@ class PersonInNeedRepository extends EntityRepository
 	 */
 	public function getPersonInNeedByPin($pin)
 	{
-		return $this->getEntityManager()->findOneByPin($pin);
+		$query=$this->getEntityManager()->createQueryBuilder('p')->from('AppBundle:PersonInNeed','p');
+		
+		$query->select('p')->where('p.pin = :pin')->setParameter(':pin', $pin);
+		
+		$query = $query->getQuery();
+		return $query->getOneOrNullResult();
 	}
 	
 	/**
@@ -29,15 +35,14 @@ class PersonInNeedRepository extends EntityRepository
 	 * @param string $surname
 	 * @return PersonInNeed
 	 */
-	public function registerPersonInNeed($name,$surname)
+	public function registerPersonInNeed($name,$surname,$pin,$reason)
 	{
 		$em=$this->getEntityManager();
 		$personInNeed= new PersonInNeed();
 		
 		$personInNeed->setName($name);
 		$personInNeed->setSurname($surname);
-		
-		$pin=$this->uniqueStrategy->generateUnique(0);//Number does not count
+				
 		$personInNeed->setPin($pin);
 		
 		$em->persist($personInNeed);

@@ -4,9 +4,9 @@ namespace AppBundle\Stategies;
 
 use AppBundle\Interfaces\GenerateUniqueStrategy;
 
-class  GenerateUniqueFourDigitNumber implements GenerateUniqueStrategy
+class GenerateUniqueFourDigitNumber implements GenerateUniqueStrategy
 {
-	const RANDOM_DIGIT_LIMIT=4
+	const RANDOM_DIGIT_LIMIT=4;
 	
 	/**
 	 * {@inheritDoc}
