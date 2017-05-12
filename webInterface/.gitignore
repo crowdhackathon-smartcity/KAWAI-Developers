@@ -21,3 +21,4 @@ params.env
 bower_components
 node_modules
 web/assets/*
+*~
