@@ -8,5 +8,5 @@ interface GenerateUniqueStrategy
 	 * @param string | int $seed
 	 * @return string
 	 */
-	public function generateUnique($seed);
+	public function generateUnique($seed=null);
 }

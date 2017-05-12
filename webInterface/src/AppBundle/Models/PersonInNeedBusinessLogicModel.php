@@ -4,6 +4,7 @@ namespace AppBundle\Models;
 
 use AppBundle\Repository\PersonInNeedRepository;
 use AppBundle\Interfaces\GenerateUniqueStrategy;
+use AppBundle\Entity\PersonInNeed;
 
 class PersonInNeedBusinessLogicModel
 {
@@ -20,9 +21,17 @@ class PersonInNeedBusinessLogicModel
 		$this->pinUniqueGenerator=$pinUniqueGenerator;
 	}
 	
-	public function registerPersonInNeed()
+	/**
+	 * 
+	 * @param string $name
+	 * @param string $surname
+	 * @param string $reason
+	 * @return PersonInNeed
+	 */
+	public function registerPersonInNeed($name,$surname,$reason)
 	{
-		
+		$pin=$this->pinUniqueGenerator->generateUnique();
+		return $this->personInNeedRepository->registerPersonInNeed($name, $surname, $pin, $reason);
 	}
 	
 	public function getPersonInNeedByPin($pin)

@@ -42,8 +42,8 @@ class PersonInNeedRepository extends EntityRepository
 		
 		$personInNeed->setName($name);
 		$personInNeed->setSurname($surname);
-				
 		$personInNeed->setPin($pin);
+		$personInNeed->setReason($reason);
 		
 		$em->persist($personInNeed);
 		$em->flush();
