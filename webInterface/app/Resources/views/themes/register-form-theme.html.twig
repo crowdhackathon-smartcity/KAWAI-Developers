@@ -1,0 +1,45 @@
+
+{% extends 'themes/form-label-as-placeholder.html.twig' %}
+
+{%- block form_row -%}
+    <div class="form-group has-feedback">
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+
+        {% if form.vars.id=="fos_user_registration_form_email" %}
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        {% elseif "fos_user_registration_form_plainPassword" in form.vars.id %}
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        {% elseif form.vars.id=="fos_user_registration_form_username" %}
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        {% endif %}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_widget_simple -%}
+  {% if label is not same as(false) -%}
+      {% if not compound -%}
+          {% set label_attr = label_attr|merge({'for': id}) %}
+      {%- endif -%}
+      {% if required -%}
+          {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+      {%- endif -%}
+      {% if label is empty -%}
+          {%- if label_format is not empty -%}
+              {% set label = label_format|replace({
+                  '%name%': name,
+                  '%id%': id,
+              }) %}
+          {%- else -%}
+              {% set label = name|humanize %}
+          {%- endif -%}
+      {%- endif -%}
+      {% if translation_domain is same as(false) %}
+        {% set attr = attr|merge({ 'placeholder': (label|trim) }) %}
+      {% else %}
+        {% set attr = attr|merge({ 'placeholder': (label|trans({}, translation_domain)|trim) }) %}
+      {% endif %}
+  {%- endif -%}
+  {% set attr = attr|merge({ 'class': (attr.class|default('') ~ 'form-control')|trim }) %}
+  {{ parent() }}
+{%- endblock form_widget_simple -%}

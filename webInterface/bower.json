@@ -1,0 +1,32 @@
+{
+  "name": "photoalbum",
+  "authors": [
+    "Dimitrios Desyllas (pc_magas) <you@example.com>"
+  ],
+  "description": "A simple photoalbum",
+  "main": "",
+  "keywords": [
+    "photoalbum"
+  ],
+  "license": "AGPLv3",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#^2.3.11",
+    "jquery-slimscroll": "slimscroll#^1.3.8",
+    "fastclick": "^1.0.6",
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "x-editable": "https://github.com/vitalets/x-editable.git#^1.5.1",
+    "iCheck": "https://github.com/fronteed/icheck.git#^1.0.2",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0"
+  }
+}

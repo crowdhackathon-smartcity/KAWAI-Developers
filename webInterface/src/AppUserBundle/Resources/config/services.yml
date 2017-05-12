@@ -1,0 +1,18 @@
+services:
+#    app_user.example:
+#        class: AppUserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  app_user.html_purifier:
+    class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
+    arguments: ["@exercise_html_purifier.default"]
+    
+#  app_user.user_profile_form:
+#    class: AppUserBundle\Form\Type
+##    arguments: ["@app_user.html_purifier"]
+#    tags:
+#      - { name: form.type, alias: app_user_registration }
+#      
+#  app.form.registration:
+#    class: AppUserBundle\Form\Type\RegistrationType
+#    tags:
+#     - { name: form.type, alias: app_user_registration }
