@@ -1,0 +1,44 @@
+{% extends "::layout_sidebar.html.twig" %}
+
+{% trans_default_domain "AppBundle" %}
+
+{% block title %} {{ "app.layout.person_in_need"|trans }} {% endblock %}
+
+{% block pageContent %}
+	<div class="box box-default">
+		<div class="box-header">
+			<h3>{{ 'app.layout.person_in_need.your_pin_is'|trans }}:</h3>
+		</div>
+		<div class="box-body">
+			<p class="text-center"><strong style="font-size:3em">{{ pin }}</strong><p>
+		</div>
+	</div>
+	
+	<div class="box box-default">
+		<div class="box-header">
+			<h3>{{ "app.layout.person_in_need.basic_info"|trans }}</h3>
+		</div>
+		<div class="box-body">
+			<table class="table">
+				<tr>
+					<th>{{ 'app.layout.person_in_need.name'|trans }}</th>
+					<td>{{ name }}</td>
+				</tr>
+				<tr>
+					<th>{{ 'app.layout.person_in_need.surname'|trans }}</th>
+					<td>{{ surname }}</td>
+				</tr>
+				<tr>
+					<th>{{ 'app.layout.person_in_need.pin'|trans }}</th>
+					<td>{{ pin }}</td>
+				</tr>
+				<tr>
+					<th colspan=2 class="text-center">{{ 'app.layout.person_in_need.reason'|trans }}:</th>
+				</tr>
+				<tr>
+					<td>{{ reason }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+{% endblock %}
