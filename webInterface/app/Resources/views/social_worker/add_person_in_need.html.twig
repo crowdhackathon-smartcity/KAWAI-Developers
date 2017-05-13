@@ -1,0 +1,16 @@
+{% extends "::layout_sidebar.html.twig" %}
+
+{% trans_default_domain "AppBundle" %}
+
+{% block title %} {{ "app.layout.add_person_in_need"|trans }} {% endblock %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block pageContent %}
+	{{ form_start(form,{'action':path('add_person_in_need')}) }}
+	    {{ form_widget(form) }}
+	    <div class="form-group">
+	    	<button type="submit" class="btn btn-primary btn-flat btn-block">{{ 'app.layout.add_person_in_need'|trans }}</button>
+	    </div>
+	{{ form_end(form) }}
+{% endblock %}
