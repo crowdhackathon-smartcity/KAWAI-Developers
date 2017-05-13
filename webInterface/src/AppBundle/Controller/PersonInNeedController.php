@@ -50,4 +50,6 @@ class PersonInNeedController extends Controller
 				'pin'=>$person->getPin(),
 				'reason'=>$person->getReason()));
 	}
+	
+	
 }
