@@ -30,6 +30,16 @@ class PersonInNeedRepository extends EntityRepository
 		return $query->getOneOrNullResult();
 	}
 	
+	
+	/**
+	 * @param numeric $pin The pin provided to the person In need by a social worker
+	 * @return PersonInNeed
+	 */
+	public function getPersonInNeedById($id)
+	{
+		return $this->find($id);
+	}
+	
 	/**
 	 * @param string $name 
 	 * @param string $surname

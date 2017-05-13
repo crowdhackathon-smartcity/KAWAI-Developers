@@ -28,9 +28,9 @@ class PersonInNeedController extends Controller
 			$dataInsert=$this->get('app.person_in_need_business_model');
 			$name=$form->get(PersonInNeedConstats::PERSON_IN_NEED_NAME)->getData();
 			$surname=$form->get(PersonInNeedConstats::PERSON_IN_NEED_SURNAME)->getData();
-			$reasone=$form->get(PersonInNeedConstats::PERSON_IN_NEED_REASON)->getData();
-			$dataInsert->registerPersonInNeed($name,$surname,$reasone);
-			//return $this->redirectToRoute('person_in_need_view');
+			$reason=$form->get(PersonInNeedConstats::PERSON_IN_NEED_REASON)->getData();
+			$dataInsert->registerPersonInNeed($name,$surname,$reason);
+// 			return $this->redirectToRoute('person_in_need_view');
 		}
 		
 		return $this->render('social_worker/add_person_in_need.html.twig',array(
@@ -43,6 +43,8 @@ class PersonInNeedController extends Controller
 	 */
 	public function viewPersonInNeed(Request $request,$id)
 	{
+		$personInNeedModel=$this->get('app.person_in_need_business_model');
 		
+		return $this->render('social_worker/person.html.twig',array('person'=>$personInNeedModel));
 	}
 }

@@ -38,4 +38,9 @@ class PersonInNeedBusinessLogicModel
 	{
 		return $this->personInNeedRepository->getPersonInNeedByPin($pin);
 	}
+	
+	public function getPersonById($id)
+	{
+		return $this->personInNeedRepository->getPersonInNeedById($id);
+	}
 }
