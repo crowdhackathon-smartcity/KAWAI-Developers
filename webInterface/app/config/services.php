@@ -8,8 +8,16 @@ use AppBundle\Stategies\VariableLengthUniqieSrtingStrategy;
 use AppBundle\Repository\VendingMachineRepository;
 use AppBundle\Models\VendingMachineBusinessModel;
 use AppBundle\Repository\PersonInNeedPerVendingRepository;
+use AppBundle\Stategies\DoNotServeTwicePerVendingMachineStrategy;
 
 $container->register('app.pin_strategy',GenerateUniqueFourDigitNumber::class);
+
+$container->register('app.vending_person_in_need_per_vending_machine',PersonInNeedPerVendingRepository::class)
+	->setFactory([new Reference("doctrine"),"getRepository"])
+	->addArgument('AppBundle:PersonInNeedPerVending');
+
+$contaner->register('app.api_limit_service',DoNotServeTwicePerVendingMachineStrategy::class)
+	->setArguments([new Reference('app.vending_person_in_need_per_vending_machine'),'%SYMFONY__api_call_limit%']);
 
 $container->register('app.person_in_need_repository',PersonInNeedRepository::class)
 	->setFactory([new Reference("doctrine"),"getRepository"])
@@ -23,7 +31,7 @@ $container->register('app.uniqueKeyGenerator',VariableLengthUniqieSrtingStrategy
 	
 $container->register('app.uniqueSecretGenerator',VariableLengthUniqieSrtingStrategy::class)
 	->setArguments(['32']);
-
+	
 $container->register('app.vending_machine_repository',VendingMachineRepository::class)
 	->setFactory([new Reference("doctrine"),"getRepository"])
 	->addArgument('AppBundle:VendingMachine');
@@ -31,6 +39,5 @@ $container->register('app.vending_machine_repository',VendingMachineRepository::
 $container->register('app.vending_machine_business_logic',VendingMachineBusinessModel::class)
 	->setArguments([new Reference('app.uniqueKeyGenerator'),new Reference('app.uniqueSecretGenerator'),new Reference('app.vending_machine_repository')]);
 
-$container->register('app.vending_person_in_need_per_vending_machine',PersonInNeedPerVendingRepository::class)
-		->setFactory([new Reference("doctrine"),"getRepository"])
-		->addArgument('AppBundle:PersonInNeedPerVending');
+
+
