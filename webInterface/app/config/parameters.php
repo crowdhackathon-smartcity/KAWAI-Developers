@@ -20,5 +20,6 @@ $container->setParameter('mailer_user', getenv('SYMFONY__smtp_user'));
 $container->setParameter('mailer_password', getenv('SYMFONY__smtp_password'));
 
 $container->setParameter('app_name', getenv('SYMFONY__app_name'));
+$container->setParameter('api_call_limit',getenv('SYMFONY__api_call_limit'));
 
 $container->setParameter('secret','am122pempa321mplotou$kei8emplom');

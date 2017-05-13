@@ -28,7 +28,7 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 			$timelimit
 	){
 		$this->personInNeedPerVending=$personInNeedPerVending;
-		$this->setTimeLimit($timelimit);
+		$this->setTimeLimit(intval($timelimit)." hours");
 	}
 	
 	/**
