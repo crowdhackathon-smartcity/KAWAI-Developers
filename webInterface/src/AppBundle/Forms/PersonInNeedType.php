@@ -18,9 +18,9 @@ class PersonInNeedType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add(PersonInNeedConstats::PERSON_IN_NEED_NAME,TextType::class,array('label'=>'social.person_in_need.name'))
-		->add(PersonInNeedConstats::PERSON_IN_NEED_SURNAME,TextType::class,array('label'=>'social.person_in_need.name'))
-		->add(PersonInNeedConstats::PERSON_IN_NEED_REASON,TextareaType::class,array('label'=>'social.person_in_need.reason'));
+		$builder->add(PersonInNeedConstats::PERSON_IN_NEED_NAME,TextType::class,array('label'=>'app.layout.person_in_need.name'))
+		->add(PersonInNeedConstats::PERSON_IN_NEED_SURNAME,TextType::class,array('label'=>'app.layout.person_in_need.surname'))
+		->add(PersonInNeedConstats::PERSON_IN_NEED_REASON,TextareaType::class,array('label'=>'app.layout.person_in_need.reason'));
 	}
 	
 	/**
@@ -31,6 +31,8 @@ class PersonInNeedType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 				'data_class' => PersonInNeed::class,
+				'translation_domain' => 'AppBundle'
+				
 		));
 	}
 }

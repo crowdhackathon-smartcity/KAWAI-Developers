@@ -6,3 +6,6 @@ app.layout.person_in_need.reason: Reason
 app.layout.person_in_need.pin: Pin
 app.layout.person_in_need.basic_info: Basic Person Info
 app.layout.person_in_need.your_pin_is: The person's Pin is
+social.person_in_need.name: Name
+social.person_in_need.surname: Surname
+social.person_in_need.reason: Reason
