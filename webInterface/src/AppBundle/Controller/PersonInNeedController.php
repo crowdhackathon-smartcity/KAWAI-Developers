@@ -29,8 +29,8 @@ class PersonInNeedController extends Controller
 			$name=$form->get(PersonInNeedConstats::PERSON_IN_NEED_NAME)->getData();
 			$surname=$form->get(PersonInNeedConstats::PERSON_IN_NEED_SURNAME)->getData();
 			$reason=$form->get(PersonInNeedConstats::PERSON_IN_NEED_REASON)->getData();
-			$dataInsert->registerPersonInNeed($name,$surname,$reason);
-// 			return $this->redirectToRoute('person_in_need_view');
+			$person=$dataInsert->registerPersonInNeed($name,$surname,$reason);
+			return $this->redirectToRoute('person_in_need_view',['id'=>$person->getId()]);
 		}
 		
 		return $this->render('social_worker/add_person_in_need.html.twig',array(
