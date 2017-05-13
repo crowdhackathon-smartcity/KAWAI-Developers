@@ -34,7 +34,7 @@ void loop(){
         
         char yep = Serial.read();
 
-        wordOut = wordOut + yep;
+        wordOut = wordOut + "*";
         lcd.setCursor(0,row);
         lcd.print(wordOut);
         Serial.flush();
@@ -56,7 +56,6 @@ void loop(){
     int answer = Serial.parseInt();  
     lcd.setCursor(0, 0);
     lcd.clear();
-    lcd.print(answer);
     if(answer > 0) {
       lcd.print("OK");
       digitalWrite(LED_BUILTIN, HIGH);   
