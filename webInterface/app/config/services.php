@@ -16,8 +16,8 @@ $container->register('app.vending_person_in_need_per_vending_machine',PersonInNe
 	->setFactory([new Reference("doctrine"),"getRepository"])
 	->addArgument('AppBundle:PersonInNeedPerVending');
 
-$contaner->register('app.api_limit_service',DoNotServeTwicePerVendingMachineStrategy::class)
-	->setArguments([new Reference('app.vending_person_in_need_per_vending_machine'),'%SYMFONY__api_call_limit%']);
+$container->register('app.api_limit_service',DoNotServeTwicePerVendingMachineStrategy::class)
+	->setArguments([new Reference('app.vending_person_in_need_per_vending_machine'),'%api_call_limit%']);
 
 $container->register('app.person_in_need_repository',PersonInNeedRepository::class)
 	->setFactory([new Reference("doctrine"),"getRepository"])
