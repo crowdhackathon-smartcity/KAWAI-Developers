@@ -1,0 +1,9 @@
+{% extends "::layout_sidebar.html.twig" %}
+
+{% trans_default_domain "AppBundle" %}
+
+{% block sidebar %}
+<ul class="sidebar-menu">
+	<li><a href="{{ path('add_person_in_need') }}"> <i class="fa  fa-users"></i> {{ "app.layout.add_person_in_need"|trans }}  </a></li>
+</ul>
+{% endblock %}
