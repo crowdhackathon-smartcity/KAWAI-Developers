@@ -23,12 +23,12 @@ class VendingMachine
 	private $machine_name;
 	
 	/**
-	 * @ORM\Column(type="string",name="key",length=140)
+	 * @ORM\Column(type="string",name="key",length=140,unique=true)
 	 */
 	private $key;
 	
 	/**
-	 * @ORM\Column(type="string",name="secret",length=255)
+	 * @ORM\Column(type="string",name="secret",length=300)
 	 */
 	private $secret;
 

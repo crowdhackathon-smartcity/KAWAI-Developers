@@ -11,8 +11,32 @@ class VendingMachineRepository extends EntityRepository
 	 * @param string $name
 	 * @return VendingMachine
 	 */
-	public function resisterANewVendingMachineUsingName($name)
+	public function resisterANewVendingMachine($name,$key,$secret)
 	{
+		$em=$this->getEntityManager();
 		
+		$entity=new VendingMachine();
+		
+		$entity->setMachineName($name);
+		$entity->setKey($key);
+		$entity->setSecret($secret);
+		
+		$em->persist($entity);
+		$em->flush($entity);
+		
+		return $entity;
+	}
+	
+	public function getVendingMachineByKey($key)
+	{
+		$qb=$this->createQueryBuilder('v')
+				->from('AppBundle:VendingMachine')
+				->where('key=:key');
+		
+		$qb->setParameter('key', $key);
+		
+		$query = $query->getQuery();
+		
+		return $query->getOneOrNullResult();
 	}
 }
