@@ -9,4 +9,8 @@ done
 
 SOURCE=$(dirname ${SOURCE})
 
-export $(cat "${SOURCE}/../params.env" | xargs)
+# export $(cat "${SOURCE}/../params.env" | xargs)
+
+while IFS='=' read -r name value; do
+  export "$name=${value//\"/}"
+done < "${SOURCE}/../params.env"
