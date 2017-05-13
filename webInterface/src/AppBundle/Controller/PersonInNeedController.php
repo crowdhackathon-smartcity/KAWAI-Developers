@@ -44,7 +44,10 @@ class PersonInNeedController extends Controller
 	public function viewPersonInNeed(Request $request,$id)
 	{
 		$personInNeedModel=$this->get('app.person_in_need_business_model');
-		
-		return $this->render('social_worker/person.html.twig',array('person'=>$personInNeedModel));
+		$person=$personInNeedModel->getPersonById($id);
+		return $this->render('social_worker/person.html.twig',array('name'=>$person->getName(),
+				'surname'=>$person->getSurname(),
+				'pin'=>$person->getPin(),
+				'reason'=>$person->getReason()));
 	}
 }
