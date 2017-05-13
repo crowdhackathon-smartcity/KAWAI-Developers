@@ -6,8 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\PersonInNeed;
 use AppBundle\Entity\VendingMachine;
 
+
 /**
- * @ORM\Entity
+ * @ORM\Entity(repository="AppBundle\Repository\PersonInNeedPerVendingRepository")
  * @ORM\Table(name="person_per_vending")
  */
 class PersonInNeedPerVending 

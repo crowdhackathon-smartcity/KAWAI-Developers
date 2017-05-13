@@ -61,15 +61,4 @@ class PersonInNeedRepository extends EntityRepository
 		return $personInNeed;
 	}
 	
-	/**
-	 * @param string $name
-	 * @param string $surname
-	 * @param string $pin
-	 * @return PersonInNeed[]
-	 */
-	public function searchPersonInNeed($name="",$surname="",$pin="")
-	{
-		//TODO: To be implemented depending the case
-	}
-	
 }
