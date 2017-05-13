@@ -12,11 +12,13 @@ class GenerateUniqueFourDigitNumber implements GenerateUniqueStrategy
 	 * {@inheritDoc}
 	 * @see \AppBundle\Interfaces\GenerateUniqueStrategy::generateUnique()
 	 */
-	public function generateUnique($seed) 
+	public function generateUnique($seed=null) 
 	{
 		$string=uniqid(gethostname(),true);	
-		$value=strval(hexdec(sha1($string)));
-		return substr($value,0,self::RANDOM_DIGIT_LIMIT);
+		$value=strval(hexdec(sha1($string))*1000);
+		$value=str_replace('.','',$value);
+		$value=substr($value,0,self::RANDOM_DIGIT_LIMIT);
+		return $value;
 	}
 
 }
