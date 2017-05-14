@@ -45,9 +45,9 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 	private function isTimeExceededTimeLimit(\DateTime $date)
 	{
 		$now=new \DateTime();
-		$diff=$now->diff($date);
+		$limit=$date->add($limit);
 		
-		return $diff > $this->timeLimit;
+		return $limit > $now;
 	}
 	
 	/**
