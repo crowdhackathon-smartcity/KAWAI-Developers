@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Stategies\DoNotServeTwicePerVendingMachineStrategy;
+use AppBundle\Constants\PersonInNeedConstats;
+use AppBundle\Constants\VendingMachineConstants;
 
 class ApiController extends Controller
 {
@@ -17,7 +20,23 @@ class ApiController extends Controller
 		$model=$this->get('app.person_in_need_business_model');
 		
 		try{
+			//I Implement Like this because this Call is needed to use the api call time limit
+			/**
+			 * @var Ambiguous $vendingMachine
+			 */
+			$vendingMachine=$this->get('app.vending_machine_business_logic');
+			$key=$request->headers->get('key');
+			$secret=$request->headers->get('secret');
+			
+			$vendingMachine=$vendingMachine->verifyVendingMachine($key,$secret);
+			
 			$person_in_need=$model->getPersonInNeedByPin($pin);
+			
+			/**
+			 * @var DoNotServeTwicePerVendingMachineStrategy $appCallLimitPolicy
+			 */
+			$appCallLimitPolicy=$this->get('app.api_limit_service');
+			$appCallLimitPolicy->applyPolicy([PersonInNeedConstats::PERSON_IN_NEED=>$person_in_need,VendingMachineConstants::VENDING_MACHINE=>$vendingMachine]);
 			
 			if(empty($person_in_need)){
 				return new JsonResponse(['message'=>"This user does not exist"],JsonResponse::HTTP_NOT_FOUND);
@@ -27,6 +46,8 @@ class ApiController extends Controller
 				return new JsonResponse($person_in_need);
 			}
 			
+		}catch (NoVendingMachineFoundException $nf) {
+			return new JsonResponse($nf->getMessage(),JsonResponse::HTTP_UNAUTHORIZED);
 		}catch(\Exception $e){
 			return new JsonResponse(['message'=>$e->getMessage()],JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
 		}

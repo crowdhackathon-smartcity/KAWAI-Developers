@@ -47,10 +47,10 @@ class VendingMachineBusinessModel
 		
 		if($vendingMachine===null){
 			throw new NoVendingMachineFoundException();
-		} else if(password_verify($secret, $vendingMachine->getSec)) {
-			return true;
+		} else if(password_verify($secret, $vendingMachine->getSecret())) {
+			return $vendingMachine;
+		} else {
+			throw new NoVendingMachineFoundException();
 		}
-		
-		return false;
 	}
 }

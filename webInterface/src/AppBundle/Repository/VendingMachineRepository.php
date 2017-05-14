@@ -29,14 +29,13 @@ class VendingMachineRepository extends EntityRepository
 	
 	public function getVendingMachineByKey($key)
 	{
-		$qb=$this->createQueryBuilder('v')
-				->from('AppBundle:VendingMachine')
-				->where('key=:key');
+		$qb=$this->getEntityManager()->createQueryBuilder('v')
+				->select('v')
+				->from('AppBundle:VendingMachine','v')
+				->where('v.key=:key')->setParameter(':key', $key);
 		
-		$qb->setParameter('key', $key);
-		
-		$query = $query->getQuery();
-		
+		$query = $qb->getQuery();
+		echo $query->getDQL()."\n";
 		return $query->getOneOrNullResult();
 	}
 }
