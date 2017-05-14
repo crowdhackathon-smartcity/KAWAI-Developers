@@ -47,7 +47,7 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 		$now=new \DateTime();
 		$diff=$now->diff($date);
 		
-		return $diff > $timeLimit;
+		return $diff > $this->timeLimit;
 	}
 	
 	/**
@@ -66,7 +66,11 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 		}
 		
 		$lastTime=$this->personInNeedPerVending->getLastTimePerdonInNeedUsedVendingMachine($personInNeed, $vendingMachine);
-		if(!empty($lastTime['date'])&&$this->isTimeExceededTimeLimit($lastTime['date'])){
+		if(empty($lastTime['date'])){
+			return;
+		}
+		$date=\Datetime::createFromFormat('Y-m-d', $lastTime['date']);
+		if($this->isTimeExceededTimeLimit($date)){
 			throw new ExceededTimeLimitException('api call', $this->estimateNextTime($lastTime));
 		}
 	}
