@@ -45,7 +45,7 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 	private function isTimeExceededTimeLimit(\DateTime $date)
 	{
 		$now=new \DateTime();
-		$limit=$date->add($limit);
+		$limit=$date->add($this->timeLimit);
 		
 		return $limit > $now;
 	}
@@ -71,7 +71,7 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 		}
 		$date=\Datetime::createFromFormat('Y-m-d', $lastTime['date']);
 		if($this->isTimeExceededTimeLimit($date)){
-			throw new ExceededTimeLimitException('api call', $this->estimateNextTime($lastTime));
+			throw new ExceededTimeLimitException('api call', $this->estimateNextTime($date));
 		}
 	}
 	
