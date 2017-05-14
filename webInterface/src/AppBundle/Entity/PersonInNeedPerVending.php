@@ -21,13 +21,13 @@ class PersonInNeedPerVending
 	private $id;
 	
 	/**
-	 * @ORM\OneToOne(targetEntity="PersonInNeed")
+	 * @ORM\ManyToOne(targetEntity="PersonInNeed")
 	 * @ORM\JoinColumn(name="person_in_need_id", referencedColumnName="id")
 	 */
 	private $personInNeed;
 	
 	/**
-	 * @ORM\OneToOne(targetEntity="VendingMachine")
+	 * @ORM\ManyToOne(targetEntity="VendingMachine")
 	 * @ORM\JoinColumn(name="vending_machine_id", referencedColumnName="id")
 	 */
 	private $vending_machine;
