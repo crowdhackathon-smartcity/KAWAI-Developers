@@ -37,10 +37,7 @@ class PersonInNeedPerVending
 	 */
 	private $date;
 	
-	/**
-	 * @PrePersist
-	 */
-	public function onPrePersistSetRegistrationDate()
+	public function __construct()
 	{
 		$this->date = new \DateTime();
 	}

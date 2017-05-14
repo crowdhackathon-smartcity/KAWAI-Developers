@@ -42,6 +42,8 @@ class ApiController extends Controller
 			if(empty($person_in_need)){
 				return new JsonResponse(['message'=>"This user does not exist"],JsonResponse::HTTP_NOT_FOUND);
 			} else {
+				$repository=$this->get('app.vending_person_in_need_per_vending_machine');
+				$repository->addPersonPerVending($person_in_need,$vendingMachine);
 				$normalizers = new \Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer();
 				$person_in_need= $normalizers->normalize($person_in_need);
 				return new JsonResponse($person_in_need);

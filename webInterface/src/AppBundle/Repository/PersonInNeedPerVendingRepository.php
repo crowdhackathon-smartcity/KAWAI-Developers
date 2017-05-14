@@ -16,14 +16,15 @@ class PersonInNeedPerVendingRepository extends EntityRepository
 	 */
 	public function addPersonPerVending(PersonInNeed $person,VendingMachine $machine)
 	{
+		$em=$this->getEntityManager();
+		
 		$entity=new PersonInNeedPerVending();
 		
 		$entity->setPersonInNeed($person);
 		$entity->setVendingMachine($machine);
 		
-		$em=$this->getEntityManager();
-		$em->flush($entity);
 		$em->persist($entity);
+		$em->flush($entity);
 		
 		return $entity;
 	}
