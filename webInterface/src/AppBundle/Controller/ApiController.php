@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Stategies\DoNotServeTwicePerVendingMachineStrategy;
 use AppBundle\Constants\PersonInNeedConstats;
 use AppBundle\Constants\VendingMachineConstants;
+use AppBundle\Exceptions\ExceededTimeLimitException;
 
 class ApiController extends Controller
 {
@@ -45,9 +46,10 @@ class ApiController extends Controller
 				$person_in_need= $normalizers->normalize($person_in_need);
 				return new JsonResponse($person_in_need);
 			}
-			
+		}catch (ExceededTimeLimitException $ex) {
+			return new JsonResponse(['message'=>$ex->getMessage()],JsonResponse::HTTP_TOO_MANY_REQUESTS);
 		}catch (NoVendingMachineFoundException $nf) {
-			return new JsonResponse($nf->getMessage(),JsonResponse::HTTP_UNAUTHORIZED);
+			return new JsonResponse(['message'=>$nf->getMessage()],JsonResponse::HTTP_UNAUTHORIZED);
 		}catch(\Exception $e){
 			return new JsonResponse(['message'=>$e->getMessage()],JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
 		}
