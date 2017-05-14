@@ -3,6 +3,7 @@ import time
 import requests
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
+headers = {'key':'hello','secret':'hellovending'}
 
 time.sleep(1)
 
@@ -17,9 +18,11 @@ while(1):
         time.sleep(.01)
 
     #Request to the RESTful api to fint if the provided code exists
-    r = requests.get("http://192.168.0.109:8000/api/person_in_need/pin/"+word)
+    r = requests.get("http://192.168.0.109:8000/api/person_in_need/pin/"+word,
+            headers=headers)
+    print r
 
-    if ( "user does not exist" in r.text):
+    if r.status_code != 200:
         time.sleep(5)
         ser.write("0")
     else:
