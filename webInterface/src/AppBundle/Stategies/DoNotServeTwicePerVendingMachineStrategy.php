@@ -61,7 +61,7 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 		$personInNeed=$params[PersonInNeedConstats::PERSON_IN_NEED];
 		$vendingMachine=$params[VendingMachineConstants::VENDING_MACHINE];
 		
-		if(emtpy($personInNeed) || empty($vendingMachine)){
+		if(empty($personInNeed) || empty($vendingMachine)){
 			throw \Exception('Please provide a person and a vending machine Entity');
 		}
 		
@@ -87,7 +87,7 @@ class DoNotServeTwicePerVendingMachineStrategy implements LimitApiCallStrategyIn
 	 */
 	public function setTimeLimit($limit) 
 	{
-		$this->timeLimit=new \DateInterval($limit);
+		$this->timeLimit=\DateInterval::createFromDateString($limit);
 		return $this;
 	}
 

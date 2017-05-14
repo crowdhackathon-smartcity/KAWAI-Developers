@@ -8,7 +8,7 @@ use AppBundle\Entity\VendingMachine;
 
 
 /**
- * @ORM\Entity(repository="AppBundle\Repository\PersonInNeedPerVendingRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonInNeedPerVendingRepository")
  * @ORM\Table(name="person_per_vending")
  */
 class PersonInNeedPerVending 
