@@ -39,12 +39,12 @@ class PersonInNeedPerVendingRepository extends EntityRepository
 			->from('AppBundle:PersonInNeedPerVending','pvm')
 			->join('pvm.personInNeed','p')
 			->join('pvm.vending_machine','v')
-			->select('MAX(pvm.date)');
+			->select('MAX(pvm.date) as date');
 		
 		$qb->andWhere('p.id=:person_in_need')->setParameter(':person_in_need', $person->getId());
 		$qb->andWhere('v.id=:vending_machine')->setParameter(':vending_machine', $machine->getId());
 		
 		$query=$qb->getQuery();
-		return $query->getOneOrNullResult();
+		return $query->getSingleResult();
 	}
 }
