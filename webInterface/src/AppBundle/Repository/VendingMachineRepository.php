@@ -35,7 +35,6 @@ class VendingMachineRepository extends EntityRepository
 				->where('v.key=:key')->setParameter(':key', $key);
 		
 		$query = $qb->getQuery();
-		echo $query->getDQL()."\n";
 		return $query->getOneOrNullResult();
 	}
 }
