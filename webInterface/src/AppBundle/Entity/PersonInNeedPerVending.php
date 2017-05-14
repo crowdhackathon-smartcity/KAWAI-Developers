@@ -33,7 +33,7 @@ class PersonInNeedPerVending
 	private $vending_machine;
 	
 	/**
-	 * @ORM\Column(type="date",type="date")
+	 * @ORM\Column(type="date",type="datetime")
 	 */
 	private $date;
 	
